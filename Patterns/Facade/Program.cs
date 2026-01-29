@@ -1,7 +1,7 @@
 using System;
 
 // Facade pattern: provide a simple interface over a set of subsystems.
-
+// EnrollmentFacade simplifies interaction with Registrar, Billing, and Notification subsystems.
 namespace FacadePatternDemo
 {
     class Registrar { public void Register(string name) => Console.WriteLine($"Registering {name}"); }
@@ -13,6 +13,7 @@ namespace FacadePatternDemo
         private readonly Registrar _r = new();
         private readonly Billing _b = new();
         private readonly Notification _n = new();
+
         public void Enroll(string student)
         {
             _r.Register(student);

@@ -10,7 +10,9 @@ namespace CompositePatternDemo
     class StudentLeaf : IComponent
     {
         private readonly string _name;
+        
         public StudentLeaf(string name) { _name = name; }
+
         public void Display(string indent = "") => Console.WriteLine(indent + _name);
     }
 
@@ -18,8 +20,11 @@ namespace CompositePatternDemo
     {
         private readonly string _name;
         private readonly List<IComponent> _children = new();
+
         public Group(string name) { _name = name; }
+
         public void Add(IComponent c) => _children.Add(c);
+
         public void Display(string indent = "")
         {
             Console.WriteLine(indent + _name);

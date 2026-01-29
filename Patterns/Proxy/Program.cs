@@ -1,7 +1,8 @@
 using System;
 
 // Proxy pattern: control access to a resource (e.g., remote StudentService)
-
+// an object representing another object to control access to it.
+// here, StudentServiceProxy controls access to RealStudentService.
 namespace ProxyPatternDemo
 {
     interface IStudentService { string GetStudentName(int id); }
@@ -15,7 +16,9 @@ namespace ProxyPatternDemo
     {
         private RealStudentService? _real;
         private readonly bool _allow;
+        
         public StudentServiceProxy(bool allow) { _allow = allow; }
+
         public string GetStudentName(int id)
         {
             if (!_allow) return "Access Denied";

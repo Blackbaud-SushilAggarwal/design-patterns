@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 
 // Flyweight pattern: share common (intrinsic) state to reduce memory.
-
+// reduce the number of objects created and to ddecrease memory footprint and increase performance.
+// `StudentStyle` : Flyweight (intrinsic state — e.g., color) shared across many `Student` objects.
+// `StudentStyleFactory` : Flyweight factory that provides shared `StudentStyle` instances from a cache.
 namespace FlyweightPatternDemo
 {
     class StudentStyle

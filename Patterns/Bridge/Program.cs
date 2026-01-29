@@ -1,13 +1,18 @@
 using System;
 
 // Bridge pattern: separate abstraction (Report) from implementation (IRenderer) so they can vary independently.
+// Composition based.
 
 namespace BridgePatternDemo
 {
+    // IRenderer = the low-level abstraction (IRenderer is an abstract/interface)
     interface IRenderer { void Render(string content); }
+
+    // PlainRenderer/HtmlRenderer are its concrete implementations.
     class PlainRenderer : IRenderer { public void Render(string content) => Console.WriteLine(content); }
     class HtmlRenderer : IRenderer { public void Render(string content) => Console.WriteLine($"<p>{content}</p>"); }
 
+    // Report = the high-level abstraction that holds a reference to an IRenderer.
     abstract class Report
     {
         protected IRenderer Renderer;

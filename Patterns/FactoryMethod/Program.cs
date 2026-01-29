@@ -18,6 +18,7 @@ namespace FactoryMethodDemo
         public abstract IStudentRepository FactoryMethod();
     }
 
+// subclass that implements the factory method to create specific products
     class InMemoryCreator : RepositoryCreator
     {
         public override IStudentRepository FactoryMethod() => new InMemoryRepository();

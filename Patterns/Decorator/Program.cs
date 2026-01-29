@@ -1,6 +1,7 @@
 using System;
 
 // Decorator pattern: dynamically add behavior to a component. Here we decorate a StudentPrinter.
+// can implemented using "Has-A" relationship (composition) rather than "Is-A" (inheritance).
 
 namespace DecoratorPatternDemo
 {
