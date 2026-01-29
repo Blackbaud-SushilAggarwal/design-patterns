@@ -5,13 +5,34 @@ using System;
 
 namespace SingletonPatternDemo
 {
-    // Make the Logger sealed to prevent inheritance which could break the singleton guarantee.
+    // Lock-based singleton (double-check locking).
+    // This demonstrates an alternative to Lazy<T> using `lock` and `volatile` for thread-safety.
     sealed class Logger
     {
-        // Explicitly specify thread-safety mode for clarity: ExecutionAndPublication is fully thread-safe.
-        private static readonly Lazy<Logger> _instance = new(() => new Logger(), System.Threading.LazyThreadSafetyMode.ExecutionAndPublication);
-        public static Logger Instance => _instance.Value;
+        // `volatile` ensures the read/write to the reference is not reordered by the compiler/runtime.
+        private static volatile Logger? _instance;
+        private static readonly object _sync = new();
+
         private Logger() { }
+
+        public static Logger Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_sync)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new Logger();
+                        }
+                    }
+                }
+                return _instance;
+            }
+        }
+
         public void Log(string message) => Console.WriteLine($"[Logger] {DateTime.UtcNow:o} - {message}");
     }
 
