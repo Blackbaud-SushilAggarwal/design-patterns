@@ -1,13 +1,15 @@
 # Singleton Pattern
 
-This folder demonstrates the Singleton pattern with a thread-safe `Logger`.
+Intent: Ensure a class has only one instance and provide a global point of access.
+
+How this demo maps to the pattern:
+- `Logger` : Singleton (single shared instance). Implementation uses double-check locking with a `volatile` field and a `lock` object.
+
+Why it works:
+- Private constructor prevents external instantiation. The `Instance` property lazily creates the single instance and uses locking to ensure thread-safety.
 
 Run:
-
 ```bash
 dotnet run --project Patterns/Singleton
 ```
 
-Key points:
-- Use `Lazy<T>` to create a thread-safe single instance.
-- Constructor is private to prevent external instantiation.
