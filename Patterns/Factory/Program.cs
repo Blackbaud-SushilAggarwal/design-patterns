@@ -8,13 +8,16 @@ namespace FactoryPatternDemo
     class ScienceStudent : Student { public override string Describe() => "Science Student"; }
     class ArtsStudent : Student { public override string Describe() => "Arts Student"; }
 
+    // Use an enum to select the student type safely instead of passing strings.
+    enum StudentType { Science, Arts }
+
     static class StudentFactory
     {
-        public static Student Create(string type) => type.ToLower() switch
+        public static Student Create(StudentType type) => type switch
         {
-            "science" => new ScienceStudent(),
-            "arts" => new ArtsStudent(),
-            _ => throw new ArgumentException("Unknown type")
+            StudentType.Science => new ScienceStudent(),
+            StudentType.Arts => new ArtsStudent(),
+            _ => throw new ArgumentException("Unknown student type")
         };
     }
 
@@ -22,8 +25,8 @@ namespace FactoryPatternDemo
     {
         static void Main()
         {
-            var s1 = StudentFactory.Create("science");
-            var s2 = StudentFactory.Create("arts");
+            var s1 = StudentFactory.Create(StudentType.Science);
+            var s2 = StudentFactory.Create(StudentType.Arts);
             Console.WriteLine(s1.Describe());
             Console.WriteLine(s2.Describe());
         }
